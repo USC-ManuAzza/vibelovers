@@ -142,7 +142,8 @@ Después abre <http://localhost:8000>.
 ├─ README.md
 ├─ Ideas_Juego              # lluvia de ideas del equipo
 ├─ assets/
-│  └─ favicon.svg           # icono del hub
+│  ├─ favicon.svg           # icono del hub
+│  └─ personajes/           # sprites de los personajes (PNG con alfa)
 ├─ ExamenFinal/
 │  ├─ examen-final.html     # minijuego 1
 │  ├─ styles.css
