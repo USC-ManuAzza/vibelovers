@@ -47,7 +47,7 @@ tradiciones y sus pequeños dramas cotidianos.
 
 | # | Minijuego | Idea en una línea | Mecánica | Estado | Autor/a | Fichero |
 |---|-----------|-------------------|----------|--------|---------|---------|
-| 1 | **Examen Final** | Enfrentate al examen final convertido en jefe de RPG | Turnos + *timing* (Paper Mario) | Incompleto | Manuel | `examen-final.html` |
+| 1 | **Examen Final** | Enfrentate al examen final convertido en jefe de RPG | Turnos + *timing* (Paper Mario) | Incompleto | Manuel | `ExamenFinal/examen-final.html` |
 | 2 | <Nombre> | <Una línea> | <Mecánica> | 🚧 En progreso | <Nombre> | `<fichero>` |
 | 3 | <Nombre> | <Una línea> | <Mecánica> | 💡 Idea | <Nombre> | `<fichero>` |
 
@@ -135,9 +135,11 @@ Después abre <http://localhost:8000>.
 .
 ├─ README.md
 ├─ Ideas_Juego              # lluvia de ideas del equipo
-├─ examen-final.html        # minijuego 1
+├─ ExamenFinal/
+│  └─ examen-final.html     # minijuego 1
 ├─ flappy-bird.html         # prototipo de referencia
-└─ <minijuego>.html         # minijuegos siguientes
+└─ <Minijuego>/
+   └─ <fichero>.html        # minijuegos siguientes
 ```
 
 **Estructura propuesta (cuando haya 3+ minijuegos)**
@@ -145,9 +147,8 @@ Después abre <http://localhost:8000>.
 ```text
 .
 ├─ index.html               # menú / hub común
-├─ juegos/
-│  ├─ examen-final.html
-│  └─ <slug>.html
+├─ ExamenFinal/
+│  └─ examen-final.html
 ├─ assets/
 │  ├─ sprites/
 │  └─ audio/
