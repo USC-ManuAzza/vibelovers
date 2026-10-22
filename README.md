@@ -51,7 +51,6 @@ a ritmo de compás.
 | 1 | **Examen Final** | Enfrentate al examen final convertido en jefe de RPG | Turnos + *timing* (Paper Mario) | Incompleto | Manuel | `ExamenFinal/examen-final.html` |
 | 2 | **Pizarra Rápida** | El profesor borra la pizarra: copia la frase antes de que desaparezca | Mecanografía contrarreloj | ✅ Jugable | Manuel | `PizarraRapida/index.html` |
 | 3 | **Compila!** | Clasifica elementos de código al ritmo de la música y el programa se escribe solo | Ritmo + 4 columnas (D·F·J·K) | ✅ Jugable | Manuel | `Compila/index.html` |
-| 4 | <Nombre> | <Una línea> | <Mecánica> | 💡 Idea | <Nombre> | `<fichero>` |
 
 **Leyenda:** ✅ jugable · 🚧 en progreso · 💡 idea · ❌ descartado
 
@@ -74,23 +73,6 @@ y nota final según los aciertos. Las tildes son opcionales.
 caen a 100 BPM y hay que pulsarlas en su columna justo al cruzar la línea. Cada
 acierto escribe un token en el editor de la derecha; cada fallo deja una marca de
 error. `Esc` pausa la partida.
-
-### Ficha de minijuego (plantilla)
-
-> Copia este bloque por cada minijuego nuevo.
-
-#### <Nombre del minijuego>
-
-- **Pitch:** <una frase>
-- **Ambientación USC:** <campus, facultad, tradición o situación>
-- **Mecánica principal:** <el único verbo que define el juego>
-- **Duración:** <30 s / 1 min / 3 min>
-- **Victoria:** <qué tiene que conseguir el jugador>
-- **Derrota:** <cómo se pierde>
-- **Controles:** <teclado / ratón / ambos>
-- **Estado:** <idea / prototipo / jugable / pulido>
-- **Autor/a:** <nombre>
-- **Fichero:** `<ruta>`
 
 ---
 
