@@ -47,7 +47,7 @@ tradiciones y sus pequeños dramas cotidianos.
 
 | # | Minijuego | Idea en una línea | Mecánica | Estado | Autor/a | Fichero |
 |---|-----------|-------------------|----------|--------|---------|---------|
-| 1 | **Examen Final** | Un estudiante se enfrenta al examen final convertido en jefe de RPG | Turnos + *timing* (Paper Mario) | ✅ Jugable | Manuel | `examen-final.html` |
+| 1 | **Examen Final** | Enfrentate al examen final convertido en jefe de RPG | Turnos + *timing* (Paper Mario) | Incompleto | Manuel | `examen-final.html` |
 | 2 | <Nombre> | <Una línea> | <Mecánica> | 🚧 En progreso | <Nombre> | `<fichero>` |
 | 3 | <Nombre> | <Una línea> | <Mecánica> | 💡 Idea | <Nombre> | `<fichero>` |
 
