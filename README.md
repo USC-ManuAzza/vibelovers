@@ -80,8 +80,8 @@ tradiciones y sus pequeños dramas cotidianos.
 
 ### Opción rápida
 
-Abre el fichero del minijuego en el navegador (doble clic). No requiere instalación
-ni conexión a internet.
+Abre **`index.html`** en el navegador (doble clic) y elige un minijuego desde la
+pantalla de inicio. No requiere instalación ni conexión a internet.
 
 ### Servidor local (recomendado)
 
@@ -137,12 +137,15 @@ Después abre <http://localhost:8000>.
 
 ```text
 .
+├─ index.html               # pantalla de inicio (hub de minijuegos)
 ├─ README.md
 ├─ Ideas_Juego              # lluvia de ideas del equipo
+├─ assets/
+│  └─ favicon.svg           # icono del hub
 ├─ ExamenFinal/
-│  ├─ examen-final.html     # minijuego 1 (marcado)
-│  ├─ styles.css            # estilos del minijuego
-│  ├─ game.js               # lógica del minijuego
+│  ├─ examen-final.html     # minijuego 1
+│  ├─ styles.css
+│  ├─ game.js
 │  └─ assets/
 │     ├─ favicon.svg
 │     └─ logo.svg
@@ -151,18 +154,16 @@ Después abre <http://localhost:8000>.
    └─ <fichero>.html        # minijuegos siguientes
 ```
 
-**Estructura propuesta (cuando haya 3+ minijuegos)**
+### Añadir un minijuego al hub
 
-```text
-.
-├─ index.html               # menú / hub común
-├─ ExamenFinal/
-│  └─ examen-final.html
-├─ assets/
-│  ├─ sprites/
-│  └─ audio/
-└─ README.md
-```
+En `index.html` hay una lista `JUEGOS` con una plantilla comentada. Para añadir uno:
+
+1. Crea la carpeta del minijuego (por ejemplo `MiJuego/`) con su HTML.
+2. Copia el bloque de plantilla de `JUEGOS` y rellena título, descripción, género y autor.
+3. Pon `estado: 'jugable'` y la ruta en `ruta: 'MiJuego/index.html'`.
+
+Los minijuegos que aún no existen se muestran como tarjetas «En construcción»
+(`estado: 'construccion'`), sin enlace.
 
 ---
 
@@ -183,7 +184,7 @@ Después abre <http://localhost:8000>.
 
 - [x] Elegir concepto: colección de minijuegos sobre la USC
 - [x] Prototipo jugable del minijuego 1 (Examen Final)
-- [ ] Menú común que enlace todos los minijuegos
+- [x] Menú común que enlace todos los minijuegos (`index.html`)
 - [ ] Minijuego 2: <nombre>
 - [ ] Minijuego 3: <nombre>
 - [ ] Minijuego 4: <nombre>

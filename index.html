@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Minijuegos USC — elige uno y juega</title>
+<meta name="description" content="Colección de minijuegos cortos sobre la vida en la Universidade de Santiago de Compostela.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<style>
+  *{box-sizing:border-box}
+  :root{
+    --bg:#061423;
+    --bg-2:#0a1f36;
+    --panel:#0e2740;
+    --panel-2:#123152;
+    --line:#1c3d5e;
+    --text:#e7f0fa;
+    --muted:#8fa9c4;
+    --accent:#4a8fe7;
+    --accent-2:#7cc4ff;
+    --ok:#4fd18b;
+    --warn:#f2c14e;
+    --red:#e0605a;
+    --shadow:0 18px 34px rgba(0,0,0,.38);
+  }
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--text);
+    font-family:"Trebuchet MS",Verdana,sans-serif;
+    line-height:1.5;-webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  .wrap{width:min(1120px,100%);margin:0 auto;padding:0 clamp(16px,4vw,32px)}
+
+  /* ---------- cabecera ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    padding:18px 0 76px;
+    background:
+      radial-gradient(900px 420px at 78% -15%, #1b4f7d 0%, transparent 62%),
+      radial-gradient(700px 380px at 8% 0%, #14395c 0%, transparent 60%),
+      linear-gradient(180deg,#0a1f36 0%, #061423 100%);
+    border-bottom:1px solid var(--line);
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background-image:
+      linear-gradient(rgba(124,196,255,.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,196,255,.055) 1px, transparent 1px);
+    background-size:34px 34px;
+    mask-image:linear-gradient(180deg,#000 0%, transparent 92%);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative;z-index:1}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.4px}
+  .brand .mark{
+    display:grid;place-items:center;width:34px;height:34px;border-radius:9px;
+    background:linear-gradient(160deg,#173d61,#0d2740);border:1px solid #2a5580;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08);font-size:16px;
+  }
+  .brand small{display:block;font-weight:400;font-size:10.5px;color:var(--muted);letter-spacing:.8px;text-transform:uppercase}
+  .navlinks{display:flex;gap:6px}
+  .navlinks a{
+    text-decoration:none;font-size:13px;color:var(--muted);
+    padding:8px 12px;border-radius:999px;transition:background .18s,color .18s;
+  }
+  .navlinks a:hover,.navlinks a:focus-visible{background:rgba(124,196,255,.1);color:var(--text)}
+
+  .hero-body{position:relative;z-index:1;padding-top:58px;max-width:720px}
+  .kicker{
+    display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;
+    font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent-2);
+    border:1px solid #2a5580;background:rgba(20,57,92,.5);border-radius:999px;padding:6px 12px;
+  }
+  .kicker i{width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px rgba(79,209,139,.18)}
+  h1{
+    margin:0 0 16px;font-size:clamp(34px,6vw,58px);line-height:1.06;letter-spacing:-1px;
+  }
+  h1 em{font-style:normal;color:var(--accent-2)}
+  .lede{margin:0 0 26px;font-size:clamp(15px,2vw,17px);color:var(--muted);max-width:56ch}
+  .cta{display:flex;flex-wrap:wrap;gap:10px}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+    padding:12px 20px;border-radius:10px;font-weight:700;font-size:14px;
+    border:1px solid transparent;transition:transform .15s, box-shadow .15s, background .15s;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn.primary{
+    background:linear-gradient(180deg,#5aa1f2,#3a7bd0);color:#03111f;
+    box-shadow:0 10px 22px rgba(58,123,208,.35);
+  }
+  .btn.ghost{border-color:#2a5580;color:var(--text);background:rgba(18,49,82,.45)}
+  .btn.ghost:hover{background:rgba(18,49,82,.8)}
+
+  /* ---------- secciones ---------- */
+  .section{padding:64px 0 8px}
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+  h2{margin:0;font-size:clamp(22px,3vw,30px);letter-spacing:-.4px}
+  .muted{color:var(--muted)}
+  .count{font-size:13px;color:var(--muted)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:18px}
+
+  .card{
+    position:relative;display:flex;flex-direction:column;
+    background:linear-gradient(180deg,#10293f 0%, #0b2033 100%);
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .card.jugable:hover,.card.jugable:focus-within{
+    transform:translateY(-4px);border-color:#3a7bd0;box-shadow:var(--shadow);
+  }
+  .thumb{
+    position:relative;display:grid;place-items:center;height:132px;
+    background:
+      radial-gradient(220px 120px at 50% 120%, rgba(74,143,231,.28), transparent 70%),
+      repeating-linear-gradient(180deg, transparent 0 23px, rgba(124,196,255,.07) 23px 24px);
+    border-bottom:1px solid var(--line);
+  }
+  .thumb .emoji{font-size:46px;filter:drop-shadow(0 8px 10px rgba(0,0,0,.35));transition:transform .2s}
+  .card.jugable:hover .thumb .emoji{transform:translateY(-3px) rotate(-4deg)}
+  .badge{
+    position:absolute;top:10px;right:10px;font-size:10.5px;font-weight:800;
+    letter-spacing:.6px;text-transform:uppercase;padding:4px 9px;border-radius:999px;
+    border:1px solid transparent;
+  }
+  .jugable .badge{background:rgba(79,209,139,.14);color:var(--ok);border-color:rgba(79,209,139,.4)}
+  .construccion .badge{background:rgba(242,193,78,.12);color:var(--warn);border-color:rgba(242,193,78,.35)}
+
+  .body{display:flex;flex-direction:column;gap:8px;padding:16px 16px 18px;flex:1}
+  .body h3{margin:0;font-size:18px;letter-spacing:-.2px}
+  .body p{margin:0;font-size:13.5px;color:var(--muted)}
+  .meta{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 0;padding:0;list-style:none}
+  .meta li{
+    font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;color:#a9c4e0;
+    background:rgba(124,196,255,.08);border:1px solid rgba(124,196,255,.18);
+    padding:3px 8px;border-radius:999px;
+  }
+  .play{
+    margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:6px;
+    font-size:13px;font-weight:800;color:var(--accent-2);
+  }
+  .overlay{position:absolute;inset:0;border-radius:14px}
+  .card.jugable .overlay:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px}
+
+  .construccion{background:linear-gradient(180deg,#0c2338 0%,#091c2c 100%);border-style:dashed;border-color:#24486a}
+  .construccion .thumb .emoji{font-size:34px;color:#5e86ab}
+  .construccion .body h3{color:#b9d0e6}
+  .construccion .body p{font-size:12.5px}
+
+  /* ---------- créditos ---------- */
+  .credits{margin-top:56px}
+  .panel{
+    background:linear-gradient(180deg,#0f2a43,#0a1f33);
+    border:1px solid var(--line);border-radius:18px;padding:clamp(20px,3vw,32px);
+  }
+  .credit-head{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap;margin-bottom:22px}
+  .credit-head p{margin:6px 0 0;font-size:13.5px;color:var(--muted)}
+  .people{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+  .person{
+    display:flex;gap:12px;align-items:flex-start;
+    background:rgba(9,27,44,.55);border:1px solid #1b3b58;border-radius:12px;padding:14px;
+  }
+  .avatar{
+    flex:0 0 auto;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;
+    font-weight:800;font-size:15px;color:#cfe6ff;
+    background:linear-gradient(160deg,#1d4a73,#12314e);border:1px solid #2c5a86;
+  }
+  .person h3{margin:0;font-size:15px}
+  .person h3 span{display:block;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:400;margin-top:2px}
+  .person p{margin:6px 0 0;font-size:12.5px;color:var(--muted)}
+  .person a{font-size:12px;color:var(--accent-2);text-decoration:none;border-bottom:1px solid rgba(124,196,255,.35)}
+  .person a:hover{border-bottom-color:var(--accent-2)}
+
+  .credit-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:18px}
+  .credit-box{border-top:1px solid var(--line);padding-top:14px}
+  .credit-box h4{margin:0 0 8px;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#a9c4e0}
+  .credit-box ul{margin:0;padding-left:18px;font-size:13px;color:var(--muted)}
+  .credit-box li{margin:3px 0}
+  .credit-box p{margin:0;font-size:13px;color:var(--muted)}
+  .license{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:#a9c4e0;
+    border:1px solid #2a5580;border-radius:999px;padding:5px 11px;margin-top:4px}
+
+  footer{
+    margin-top:56px;border-top:1px solid var(--line);
+    padding:22px 0 34px;font-size:12px;color:#6f8cab;text-align:center;
+  }
+  footer strong{color:#9fbbd6;font-weight:600}
+
+  @media (max-width:560px){
+    .hero{padding-bottom:56px}
+    .hero-body{padding-top:40px}
+    .navlinks a{padding:8px 9px;font-size:12px}
+    .thumb{height:112px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important;animation:none !important;scroll-behavior:auto !important}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <nav class="nav">
+      <span class="brand">
+        <span class="mark">🎓</span>
+        <span>Minijuegos USC<small>Universidade de Santiago</small></span>
+      </span>
+      <div class="navlinks">
+        <a href="#minijuegos">Minijuegos</a>
+        <a href="#creditos">Créditos</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="wrap hero-body">
+    <p class="kicker"><i></i> Hackatón · edición 2026</p>
+    <h1>La USC, en <em>minijuegos</em>.</h1>
+    <p class="lede">
+      Cinco minutos, cinco dramas universitarios. Elige una tarjeta y juega directamente
+      en el navegador: sin instalar nada, sin registro, sin excusas.
+    </p>
+    <div class="cta">
+      <a class="btn primary" href="#minijuegos">Ver minijuegos ▸</a>
+      <a class="btn ghost" href="#creditos">Quién lo hizo</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="section" id="minijuegos">
+    <div class="section-head">
+      <h2>Minijuegos</h2>
+      <p class="count" id="count"></p>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="section credits" id="creditos">
+    <div class="panel">
+      <div class="credit-head">
+        <div>
+          <h2>Créditos</h2>
+          <p>Proyecto hecho en el hackatón · <span title="TODO">Universidade de Santiago de Compostela</span></p>
+        </div>
+        <span class="license">📜 Licencia MIT</span>
+      </div>
+
+      <div class="people">
+        <article class="person">
+          <div class="avatar">M</div>
+          <div>
+            <h3>Manuel <span>Programación</span></h3>
+            <p>Examen Final</p>
+            <a href="https://github.com/USC-ManuAzza" target="_blank" rel="noopener">@USC-ManuAzza</a>
+          </div>
+        </article>
+        <article class="person">
+          <div class="avatar">L</div>
+          <div>
+            <h3>Laura <span>Rol por definir</span></h3>
+            <p>Minijuego pendiente</p>
+          </div>
+        </article>
+        <article class="person">
+          <div class="avatar">P</div>
+          <div>
+            <h3>Pablo <span>Rol por definir</span></h3>
+            <p>Minijuego pendiente</p>
+          </div>
+        </article>
+        <article class="person">
+          <div class="avatar">C</div>
+          <div>
+            <h3>Carmen <span>Rol por definir</span></h3>
+            <p>Minijuego pendiente</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="credit-cols">
+        <div class="credit-box">
+          <h4>Hecho con</h4>
+          <ul>
+            <li>HTML5, CSS3 y JavaScript vanilla</li>
+            <li>WebAudio para los efectos</li>
+            <li>Cero dependencias y cero build</li>
+          </ul>
+        </div>
+        <div class="credit-box">
+          <h4>Inspiración</h4>
+          <ul>
+            <li>Paper Mario (combate por turnos)</li>
+            <li>WarioWare (colección de minijuegos)</li>
+            <li>La vida en el campus</li>
+          </ul>
+        </div>
+        <div class="credit-box">
+          <h4>Aviso</h4>
+          <p>Proyecto no oficial, sin relación con la Universidade de Santiago de Compostela. Cualquier parecido con exámenes reales es pura coincidencia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong>Minijuegos USC</strong> · código abierto · hecho con cariño y cafeína
+  </div>
+</footer>
+
+<script>
+'use strict';
+
+/* ============================================================
+   PLANTILLA — para añadir un minijuego nuevo:
+   1. Copia el bloque de abajo y rellena los datos.
+   2. Crea la carpeta del minijuego (ej. MiJuego/) con su HTML.
+   3. pon estado:'jugable' y la ruta relativa en 'ruta'.
+   4. Si aún no existe, déjalo en estado:'construccion' y quita 'ruta'.
+
+   { titulo:'Mi minijuego', desc:'Una línea de qué va.', estado:'jugable',
+     ruta:'MiJuego/index.html', etiqueta:'Género', autor:'Nombre', emoji:'🎮' },
+   ============================================================ */
+
+const JUEGOS = [
+  {
+    titulo: 'Examen Final',
+    desc: 'El examen final se convierte en jefe de RPG. Turnos, timing y mucha ansiedad.',
+    estado: 'jugable',
+    ruta: 'ExamenFinal/examen-final.html',
+    etiqueta: 'RPG por turnos',
+    autor: 'Manuel',
+    emoji: '📄'
+  },
+  {
+    titulo: 'Tu minijuego',
+    desc: 'Hueco libre. Copia la plantilla del código y aparecerá aquí.',
+    estado: 'construccion',
+    emoji: '＋'
+  },
+  {
+    titulo: 'Tu minijuego',
+    desc: 'Hueco libre para el siguiente minijuego del equipo.',
+    estado: 'construccion',
+    emoji: '＋'
+  },
+  {
+    titulo: 'Tu minijuego',
+    desc: 'Hueco libre para el siguiente minijuego del equipo.',
+    estado: 'construccion',
+    emoji: '＋'
+  }
+];
+
+const ESTADOS = {
+  jugable:      { etiqueta: 'Jugable', clase: 'jugable' },
+  construccion: { etiqueta: 'En construcción', clase: 'construccion' }
+};
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function pintar(){
+  const grid = document.getElementById('grid');
+  const frag = document.createDocumentFragment();
+
+  JUEGOS.forEach(j => {
+    const st = ESTADOS[j.estado] || ESTADOS.construccion;
+    const card = document.createElement('article');
+    card.className = 'card ' + st.clase;
+
+    const meta = [];
+    if(j.etiqueta) meta.push('<li>' + esc(j.etiqueta) + '</li>');
+    if(j.autor) meta.push('<li>' + esc(j.autor) + '</li>');
+
+    const jugable = j.estado === 'jugable' && j.ruta;
+
+    card.innerHTML =
+      '<div class="thumb"><span class="emoji">' + (j.emoji || '🎮') + '</span>' +
+      '<span class="badge">' + st.etiqueta + '</span></div>' +
+      '<div class="body">' +
+        '<h3>' + esc(j.titulo) + '</h3>' +
+        '<p>' + esc(j.desc) + '</p>' +
+        (meta.length ? '<ul class="meta">' + meta.join('') + '</ul>' : '') +
+        (jugable ? '<span class="play">Jugar ▸</span>' : '') +
+      '</div>' +
+      (jugable ? '<a class="overlay" href="' + esc(j.ruta) + '" aria-label="Jugar ' + esc(j.titulo) + '"></a>' : '');
+
+    frag.appendChild(card);
+  });
+
+  grid.replaceChildren(frag);
+
+  const listos = JUEGOS.filter(j => j.estado === 'jugable').length;
+  document.getElementById('count').textContent =
+    listos + ' de ' + JUEGOS.length + ' minijuegos disponibles';
+}
+
+pintar();
+</script>
+</body>
+</html>

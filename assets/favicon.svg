@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Minijuegos USC">
+  <rect width="64" height="64" rx="14" fill="#0a1f36"/>
+  <g transform="rotate(-12 26 38)">
+    <rect x="9" y="27" width="28" height="22" rx="3" fill="#9fb8d4" opacity=".55"/>
+  </g>
+  <g transform="rotate(7 40 30)">
+    <rect x="26" y="16" width="27" height="23" rx="3" fill="#fffdf3" stroke="#0a1f36" stroke-width="2.5"/>
+    <line x1="30" y1="23" x2="49" y2="23" stroke="#d1372f" stroke-width="2.5"/>
+    <circle cx="34" cy="30" r="2.6" fill="#0a1f36"/>
+    <circle cx="43" cy="30" r="2.6" fill="#0a1f36"/>
+  </g>
+  <path d="M31 47l10-5-10-5z" fill="#7cc4ff"/>
+</svg>
