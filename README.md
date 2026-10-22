@@ -53,6 +53,10 @@ tradiciones y sus pequeños dramas cotidianos.
 
 **Leyenda:** ✅ jugable · 🚧 en progreso · 💡 idea · ❌ descartado
 
+<p align="center">
+  <img src="ExamenFinal/assets/logo.svg" alt="Examen Final — batalla de papel" width="440">
+</p>
+
 ### Ficha de minijuego (plantilla)
 
 > Copia este bloque por cada minijuego nuevo.
@@ -138,7 +142,10 @@ Después abre <http://localhost:8000>.
 ├─ ExamenFinal/
 │  ├─ examen-final.html     # minijuego 1 (marcado)
 │  ├─ styles.css            # estilos del minijuego
-│  └─ game.js               # lógica del minijuego
+│  ├─ game.js               # lógica del minijuego
+│  └─ assets/
+│     ├─ favicon.svg
+│     └─ logo.svg
 ├─ flappy-bird.html         # prototipo de referencia
 └─ <Minijuego>/
    └─ <fichero>.html        # minijuegos siguientes
