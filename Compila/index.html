@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Compila! — minijuego de ritmo</title>
+<meta name="description" content="Minijuego de ritmo: clasifica elementos de código antes de que crucen la línea.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app">
+  <header class="hud">
+    <div class="brand">
+      <span class="ico">⌨️</span>
+      <span>Compila!<small>minijuego de ritmo</small></span>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="score">0</b><small>puntos</small></div>
+      <div class="stat"><b id="combo">0x</b><small>combo</small></div>
+      <div class="stat"><b id="acc">100%</b><small>precisión</small></div>
+      <button id="mute" class="mini" title="Sonido">🔊</button>
+    </div>
+  </header>
+
+  <main class="stage">
+    <section class="playfield">
+      <canvas id="board" aria-label="Pista de notas"></canvas>
+      <div class="judge" id="judge" aria-live="polite"></div>
+    </section>
+
+    <aside class="editor" aria-label="Código generado">
+      <div class="editor-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="file">main.py</span>
+        <span class="status" id="status">esperando…</span>
+      </div>
+      <pre class="code" id="code"></pre>
+      <div class="progress"><i id="prog"></i></div>
+    </aside>
+  </main>
+
+  <div class="lanes" id="lanes">
+    <button class="lane l0" data-lane="0"><b>D</b><span>palabra clave</span></button>
+    <button class="lane l1" data-lane="1"><b>F</b><span>símbolo</span></button>
+    <button class="lane l2" data-lane="2"><b>J</b><span>número</span></button>
+    <button class="lane l3" data-lane="3"><b>K</b><span>texto</span></button>
+  </div>
+
+  <p class="hint" id="hint">
+    Pulsa <b>D</b> · <b>F</b> · <b>J</b> · <b>K</b> cuando la ficha cruce la línea, según lo que sea.
+  </p>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="panel">
+    <h1 id="ovTitle">COMPILA!</h1>
+    <p id="ovText">
+      Cada ficha que cae es un elemento de código. Clasifícala en la columna correcta
+      justo cuando cruza la línea: así se escribe el programa en pantalla.
+    </p>
+    <ul class="rules">
+      <li><b class="k0">D</b> palabras clave — <code>if</code>, <code>for</code>, <code>return</code></li>
+      <li><b class="k1">F</b> símbolos — <code>{</code>, <code>;</code>, <code>=&gt;</code></li>
+      <li><b class="k2">J</b> números — <code>42</code>, <code>3.14</code>, <code>0xFF</code></li>
+      <li><b class="k3">K</b> textos — <code>"hola"</code>, <code>"USC"</code></li>
+    </ul>
+    <button id="ovBtn" class="big">Empezar a compilar ▸</button>
+  </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>
