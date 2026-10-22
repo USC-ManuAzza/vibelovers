@@ -42,7 +42,7 @@ const W_MISS = 260;
 const TOTAL_STEPS = 176;
 
 const S = {
-  running: false, ended: false, mute: false,
+  running: false, ended: false, mute: false, paused: false, pauseAt: 0,
   t0: 0, chartEnd: 0, notes: [],
   score: 0, combo: 0, maxCombo: 0,
   judged: 0, hits: 0, errors: 0,
@@ -205,7 +205,7 @@ function flashLane(lane, ok){
 
 /* ---------- juicio ---------- */
 function press(lane){
-  if (!S.running || S.ended) return;
+  if (!S.running || S.ended || S.paused) return;
   const now = performance.now() - S.t0;
 
   let mejor = null, mejorDt = Infinity;
@@ -378,7 +378,7 @@ function draw(now){
 let raf = 0;
 
 function loop(){
-  if (!S.running) return;
+  if (!S.running || S.paused) return;
   const now = performance.now() - S.t0;
 
   const beat = Math.floor(now / 600);
@@ -395,6 +395,25 @@ function loop(){
   progEl.style.width = Math.min(100, Math.max(0, (now / S.chartEnd) * 100)) + '%';
 
   if (now > S.chartEnd + 900){ fin(); return; }
+  raf = requestAnimationFrame(loop);
+}
+
+/* ---------- pausa ---------- */
+function pausar(){
+  if (!S.running || S.paused || S.ended) return;
+  S.paused = true;
+  S.pauseAt = performance.now();
+  cancelAnimationFrame(raf);
+  $('pausa').classList.remove('hidden');
+  $('resumeBtn').focus();
+}
+
+function reanudar(){
+  if (!S.paused) return;
+  S.t0 += performance.now() - S.pauseAt;
+  S.paused = false;
+  S.lastBeat = -1;
+  $('pausa').classList.add('hidden');
   raf = requestAnimationFrame(loop);
 }
 
@@ -447,6 +466,8 @@ function empezar(){
 
   S.notes = construirChart();
   S.chartEnd = S.notes.reduce((m, n) => Math.max(m, n.t), 0) + 1200;
+  S.paused = false;
+  $('pausa').classList.add('hidden');
 
   parts.length = 0;
   cargarCodigo();
@@ -465,13 +486,18 @@ function empezar(){
 const TECLAS = { KeyD: 0, KeyF: 1, KeyJ: 2, KeyK: 3, ArrowLeft: 0, ArrowDown: 1, ArrowUp: 2, ArrowRight: 3 };
 
 window.addEventListener('keydown', e => {
+  if (e.code === 'Escape'){
+    e.preventDefault();
+    if (S.paused) reanudar();
+    else pausar();
+    return;
+  }
   if (e.repeat) return;
   const lane = TECLAS[e.code];
   if (lane !== undefined){
     e.preventDefault();
     press(lane);
   }
-  if (e.code === 'Escape' && S.running){ S.running = false; cancelAnimationFrame(raf); }
 });
 
 laneBtns.forEach(b => {
@@ -481,6 +507,16 @@ laneBtns.forEach(b => {
 
 $('ovBtn').addEventListener('click', empezar);
 
+$('pause').addEventListener('click', () => {
+  if (S.paused) reanudar(); else pausar();
+});
+
+$('resumeBtn').addEventListener('click', reanudar);
+
+$('quitBtn').addEventListener('click', () => {
+  window.location.href = '../index.html';
+});
+
 $('mute').addEventListener('click', () => {
   S.mute = !S.mute;
   $('mute').textContent = S.mute ? '🔇' : '🔊';
@@ -488,6 +524,7 @@ $('mute').addEventListener('click', () => {
 
 window.addEventListener('keydown', e => {
   if (e.code === 'Enter' && !$('overlay').classList.contains('hidden')) empezar();
+  if (e.code === 'Enter' && !$('pausa').classList.contains('hidden')) reanudar();
 });
 
 resize();

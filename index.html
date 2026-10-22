@@ -156,6 +156,7 @@
   .credit-head{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap;margin-bottom:22px}
   .credit-head p{margin:6px 0 0;font-size:13.5px;color:var(--muted)}
   .people{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+  .people.solo{grid-template-columns:minmax(0,520px)}
   .person{
     display:flex;gap:12px;align-items:flex-start;
     background:rgba(9,27,44,.55);border:1px solid #1b3b58;border-radius:12px;padding:14px;
@@ -246,39 +247,22 @@
         <span class="license">📜 Licencia MIT</span>
       </div>
 
-      <div class="people">
+      <div class="people solo">
         <article class="person">
           <div class="avatar">M</div>
           <div>
-            <h3>Manuel <span>Programación</span></h3>
-            <p>Examen Final</p>
+            <h3>Manuel <span>Autor · programación y diseño</span></h3>
+            <p>Examen Final · Pizarra Rápida · Compila!</p>
             <a href="https://github.com/USC-ManuAzza" target="_blank" rel="noopener">@USC-ManuAzza</a>
-          </div>
-        </article>
-        <article class="person">
-          <div class="avatar">L</div>
-          <div>
-            <h3>Laura <span>Rol por definir</span></h3>
-            <p>Minijuego pendiente</p>
-          </div>
-        </article>
-        <article class="person">
-          <div class="avatar">P</div>
-          <div>
-            <h3>Pablo <span>Rol por definir</span></h3>
-            <p>Minijuego pendiente</p>
-          </div>
-        </article>
-        <article class="person">
-          <div class="avatar">C</div>
-          <div>
-            <h3>Carmen <span>Rol por definir</span></h3>
-            <p>Minijuego pendiente</p>
           </div>
         </article>
       </div>
 
       <div class="credit-cols">
+        <div class="credit-box">
+          <h4>Agradecimientos</h4>
+          <p><b>Laura</b> — por dar la idea del proyecto: una colección de minijuegos ambientados en la USC.</p>
+        </div>
         <div class="credit-box">
           <h4>Hecho con</h4>
           <ul>
@@ -342,6 +326,15 @@ const JUEGOS = [
     etiqueta: 'Mecanografía',
     autor: 'Manuel',
     emoji: '🧽'
+  },
+  {
+    titulo: 'Compila!',
+    desc: 'Ritmo y código: clasifica cada ficha en su columna y el programa se escribe en pantalla.',
+    estado: 'jugable',
+    ruta: 'Compila/index.html',
+    etiqueta: 'Ritmo',
+    autor: 'Manuel',
+    emoji: '⌨️'
   },
   {
     titulo: 'Tu minijuego',

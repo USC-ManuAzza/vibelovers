@@ -170,6 +170,14 @@ body::before{
 .big:hover{transform:translateY(-2px)}
 .big:active{transform:translateY(1px)}
 
+.panel-mini{width:min(420px,100%)}
+.link{
+  display:block;margin:12px auto 0;padding:6px 8px;border:0;background:none;
+  color:var(--muted);font:inherit;font-size:12.5px;text-decoration:underline;
+  text-underline-offset:3px;cursor:pointer;
+}
+.link:hover{color:var(--text)}
+
 .result{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 16px;text-align:center}
 .result div{background:rgba(6,18,29,.7);border:1px solid #1f4468;border-radius:10px;padding:10px 4px}
 .result b{display:block;font-size:19px;color:#eaf5ff;font-variant-numeric:tabular-nums}

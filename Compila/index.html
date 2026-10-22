@@ -20,6 +20,7 @@
       <div class="stat"><b id="score">0</b><small>puntos</small></div>
       <div class="stat"><b id="combo">0x</b><small>combo</small></div>
       <div class="stat"><b id="acc">100%</b><small>precisión</small></div>
+      <button id="pause" class="mini" title="Pausa (Esc)" aria-label="Pausar">⏸</button>
       <button id="mute" class="mini" title="Sonido">🔊</button>
     </div>
   </header>
@@ -67,6 +68,15 @@
       <li><b class="k3">K</b> textos — <code>"hola"</code>, <code>"USC"</code></li>
     </ul>
     <button id="ovBtn" class="big">Empezar a compilar ▸</button>
+  </div>
+</div>
+
+<div class="overlay hidden" id="pausa">
+  <div class="panel panel-mini">
+    <h1>PAUSA</h1>
+    <p>El profesor ha salido de clase. El tiempo no corre.</p>
+    <button id="resumeBtn" class="big">Continuar ▸</button>
+    <button id="quitBtn" class="link">Salir al menú</button>
   </div>
 </div>
 
