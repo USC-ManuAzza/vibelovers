@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pizarra Rápida — escribe antes de que borre</title>
+<meta name="description" content="Minijuego de mecanografía: copia la frase de la pizarra antes de que el profesor la borre.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="room">
+  <header class="hud">
+    <div class="brand">
+      <span class="ico">🧽</span>
+      <span>Pizarra Rápida<small>minijuego de mecanografía</small></span>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="pts">0</b><small>puntos</small></div>
+      <div class="stat"><b id="mult">x1</b><small>racha</small></div>
+      <div class="stat folios" id="vidas" aria-label="Folios restantes">📄📄📄</div>
+    </div>
+  </header>
+
+  <main class="stage">
+    <div class="board-frame">
+      <div class="board">
+        <div class="teacher" id="teacher" aria-hidden="true">👨‍🏫<span class="eraser">🧽</span></div>
+        <p class="chalk" id="frase" aria-live="polite"></p>
+        <div class="timer" role="progressbar" aria-label="Tiempo restante"><i id="timerBar"></i></div>
+      </div>
+      <div class="tray"></div>
+    </div>
+
+    <div class="folio">
+      <span class="folio-label">TU FOLIO</span>
+      <div class="folio-line">
+        <div class="typed" id="typed" aria-hidden="true"></div>
+        <input id="input" type="text" autocomplete="off" autocapitalize="off" autocorrect="off"
+               spellcheck="false" aria-label="Escribe la frase de la pizarra">
+      </div>
+    </div>
+
+    <p class="hint" id="hint">Escribe la frase antes de que la borre.</p>
+  </main>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="panel">
+    <h1 id="ovTitle">PIZARRA RÁPIDA</h1>
+    <p id="ovText">El profesor está de mal humor y borra la pizarra mientras copias. Tienes tres folios: cada frase que se borre antes de que la escribas, uno menos.</p>
+    <ul class="rules">
+      <li><b>⌨️ Escribe</b> la frase tal cual aparece en la pizarra.</li>
+      <li><b>⏱️ El tiempo</b> depende de la longitud y del nivel.</li>
+      <li><b>🔥 Racha</b> cada 3 aciertos seguidos sube el multiplicador.</li>
+      <li><b>📄 Folios</b> pierdes uno por frase fallida; con 0, a casa.</li>
+      <li>Las tildes son opcionales: no hace falta escribirlas.</li>
+    </ul>
+    <button id="ovBtn" class="big">Empezar a copiar</button>
+  </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>

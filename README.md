@@ -48,8 +48,9 @@ tradiciones y sus pequeños dramas cotidianos.
 | # | Minijuego | Idea en una línea | Mecánica | Estado | Autor/a | Fichero |
 |---|-----------|-------------------|----------|--------|---------|---------|
 | 1 | **Examen Final** | Enfrentate al examen final convertido en jefe de RPG | Turnos + *timing* (Paper Mario) | Incompleto | Manuel | `ExamenFinal/examen-final.html` |
-| 2 | <Nombre> | <Una línea> | <Mecánica> | 🚧 En progreso | <Nombre> | `<fichero>` |
-| 3 | <Nombre> | <Una línea> | <Mecánica> | 💡 Idea | <Nombre> | `<fichero>` |
+| 2 | **Pizarra Rápida** | El profesor borra la pizarra: copia la frase antes de que desaparezca | Mecanografía contrarreloj | ✅ Jugable | Manuel | `PizarraRapida/index.html` |
+| 3 | <Nombre> | <Una línea> | <Mecánica> | 🚧 En progreso | <Nombre> | `<fichero>` |
+| 4 | <Nombre> | <Una línea> | <Mecánica> | 💡 Idea | <Nombre> | `<fichero>` |
 
 **Leyenda:** ✅ jugable · 🚧 en progreso · 💡 idea · ❌ descartado
 
@@ -149,6 +150,10 @@ Después abre <http://localhost:8000>.
 │  └─ assets/
 │     ├─ favicon.svg
 │     └─ logo.svg
+├─ PizarraRapida/
+│  ├─ index.html            # minijuego 2
+│  ├─ styles.css
+│  └─ game.js
 ├─ flappy-bird.html         # prototipo de referencia
 └─ <Minijuego>/
    └─ <fichero>.html        # minijuegos siguientes
