@@ -136,7 +136,9 @@ Después abre <http://localhost:8000>.
 ├─ README.md
 ├─ Ideas_Juego              # lluvia de ideas del equipo
 ├─ ExamenFinal/
-│  └─ examen-final.html     # minijuego 1
+│  ├─ examen-final.html     # minijuego 1 (marcado)
+│  ├─ styles.css            # estilos del minijuego
+│  └─ game.js               # lógica del minijuego
 ├─ flappy-bird.html         # prototipo de referencia
 └─ <Minijuego>/
    └─ <fichero>.html        # minijuegos siguientes

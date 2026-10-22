@@ -1,0 +1,163 @@
+  *{box-sizing:border-box}
+  :root{
+    --ink:#1d1b16; --paper:#fffdf3; --red:#d1372f; --blue:#2f6bd1;
+    --green:#2f9e5c; --yellow:#f2c14e; --wood:#8a5a3b;
+  }
+  html,body{height:100%}
+  body{
+    margin:0; min-height:100%; color:var(--ink);
+    font-family:"Trebuchet MS",Verdana,sans-serif;
+    background:radial-gradient(circle at 50% 0%, #c9a06a 0%, #a97c4e 45%, #7d4f33 100%);
+    display:grid; place-items:center; padding:14px;
+    overflow-x:hidden;
+  }
+  #game{width:min(980px,100%); position:relative}
+
+  .topbar{display:flex;justify-content:space-between;align-items:center;color:#fff8e7;margin-bottom:10px}
+  .brand{font-weight:800;letter-spacing:1px;font-size:15px}
+  .brand span{font-weight:400;opacity:.75;font-size:12px;letter-spacing:.3px}
+  .mini{background:rgba(0,0,0,.25);color:#fff8e7;border:2px solid rgba(255,248,231,.5);
+    border-radius:6px;padding:4px 8px;cursor:pointer;font:inherit;font-size:12px}
+  .mini:hover{background:rgba(0,0,0,.4)}
+
+  #arena{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:end;min-height:300px}
+
+  .actor{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0}
+
+  .card{
+    position:relative; width:210px; background:var(--paper);
+    border:3px solid var(--ink); border-radius:6px; padding:10px;
+    box-shadow:7px 9px 0 rgba(0,0,0,.35);
+    transform:rotate(var(--rot,-2deg));
+    transition:transform .12s ease;
+  }
+  #playerCard{--rot:-2deg}
+  #enemyCard{--rot:2deg; width:250px; padding:12px}
+
+  .cardTop{font-family:"Segoe Print","Comic Sans MS",cursive;font-size:13px;text-align:center;
+    border-bottom:2px solid var(--ink);padding-bottom:3px;letter-spacing:1px}
+  .face{font-size:54px;text-align:center;line-height:1.1;margin:6px 0 2px}
+  .cardName{font-size:11px;text-align:center;opacity:.7}
+
+  .exam{
+    background:
+      repeating-linear-gradient(to bottom, transparent 0 21px, #cfd8e6 21px 22px),
+      var(--paper);
+    overflow:hidden;
+  }
+  .examHead{font-family:"Segoe Print","Comic Sans MS",cursive;font-size:19px;text-align:center;
+    letter-spacing:1px;color:var(--red);border-bottom:2px solid var(--red);padding-bottom:4px}
+  .examSub{font-size:9px;text-align:center;opacity:.65;margin:4px 0 8px}
+  .eyes{display:flex;justify-content:center;gap:36px;margin:10px 0 8px}
+  .eye{width:22px;height:22px;background:var(--ink);border-radius:50%;position:relative}
+  .eye::after{content:"";position:absolute;top:4px;left:5px;width:7px;height:7px;background:#fff;border-radius:50%}
+  .brows{position:absolute;top:70px;left:0;right:0;display:flex;justify-content:center;gap:26px}
+  .brows b{display:block;width:30px;height:4px;background:var(--ink);border-radius:2px}
+  .brows b:first-child{transform:rotate(12deg)}
+  .brows b:last-child{transform:rotate(-12deg)}
+  .lines{display:grid;gap:5px;margin-top:2px}
+  .lines i{display:block;height:5px;background:#c8d2e2;border-radius:3px}
+  .lines i:nth-child(2){width:86%}
+  .lines i:nth-child(4){width:68%}
+  .stamp{position:absolute;right:8px;bottom:8px;transform:rotate(-8deg);
+    border:3px solid var(--red);color:var(--red);background:rgba(255,255,255,.65);
+    font-weight:800;font-size:10px;letter-spacing:2px;padding:2px 6px;border-radius:3px}
+
+  .stats{width:100%;max-width:250px;display:grid;gap:5px}
+  .bar{position:relative;height:15px;background:#e8e2d0;border:2px solid var(--ink);
+    border-radius:999px;overflow:hidden}
+  .bar > i{position:absolute;left:0;top:0;bottom:0;width:100%;
+    background:linear-gradient(#4cc27a,#2f9e5c);transition:width .35s ease;z-index:1}
+  .bar.fp > i{background:linear-gradient(#6f9df0,#2f6bd1)}
+  .bar.star > i{background:linear-gradient(#ffe08a,#f2c14e)}
+  .bar.enemy > i{background:linear-gradient(#ee6b62,#c8332a)}
+  .bar > span{position:relative;z-index:2;display:grid;place-items:center;height:100%;
+    font-size:9px;font-weight:800;letter-spacing:.4px;color:#12100c}
+
+  .log{min-height:64px;max-height:80px;overflow:hidden;margin:12px 0 0;
+    background:rgba(20,14,8,.55);border:2px solid rgba(255,248,231,.25);border-radius:6px;
+    padding:6px 10px;color:#fff8e7;font-size:12.5px;line-height:1.45}
+  .log div{opacity:.55}
+  .log div:last-child{opacity:1}
+  .log .good{color:#9ff0bb}
+  .log .warn{color:#ffd28a}
+  .log .dim{opacity:.5}
+
+  .hint{color:#fff8e7;font-size:12px;text-align:center;margin:10px 0 8px;opacity:.85;min-height:16px}
+
+  .commands{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+  .commands button{
+    background:var(--paper);border:3px solid var(--ink);border-radius:6px;
+    box-shadow:4px 5px 0 rgba(0,0,0,.35);padding:8px 4px;cursor:pointer;
+    font:inherit;font-weight:800;font-size:12.5px;color:var(--ink);
+    display:flex;flex-direction:column;align-items:center;gap:1px;
+    transition:transform .06s ease, box-shadow .06s ease;
+  }
+  .commands button small{font-weight:400;opacity:.6;font-size:10px}
+  .commands button:hover:not(:disabled){transform:translateY(-2px)}
+  .commands button:active:not(:disabled){transform:translate(3px,4px);box-shadow:1px 1px 0 rgba(0,0,0,.35)}
+  .commands button:disabled{opacity:.4;cursor:not-allowed;box-shadow:2px 3px 0 rgba(0,0,0,.25)}
+
+  .qte{position:fixed;inset:0;display:grid;place-items:center;background:rgba(12,8,4,.6);
+    backdrop-filter:blur(2px);z-index:50}
+  .qte.hidden{display:none}
+  .qteBox{width:min(520px,92vw);background:var(--paper);border:3px solid var(--ink);
+    border-radius:8px;box-shadow:8px 10px 0 rgba(0,0,0,.4);padding:16px 18px;text-align:center;
+    animation:pop .15s ease-out}
+  @keyframes pop{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+  .qteTitle{font-family:"Segoe Print","Comic Sans MS",cursive;font-size:21px;letter-spacing:1px}
+  .qteHint{font-size:12px;opacity:.7;margin:2px 0 14px}
+  .track{position:relative;height:28px;background:#efe7d2;border:3px solid var(--ink);
+    border-radius:999px;overflow:hidden;cursor:pointer;touch-action:none}
+  .zone{position:absolute;top:0;bottom:0}
+  .zone.good{background:#ffe08a}
+  .zone.perfect{background:var(--green)}
+  .marker{position:absolute;top:-3px;bottom:-3px;width:7px;margin-left:-3.5px;background:var(--red);
+    box-shadow:0 0 0 2px #fff;z-index:3}
+  .qteFoot{margin-top:10px;font-size:11px;opacity:.6}
+
+  .overlay{position:fixed;inset:0;display:grid;place-items:center;background:rgba(12,8,4,.72);z-index:60}
+  .overlay.hidden{display:none}
+  .panel{width:min(520px,92vw);background:var(--paper);border:3px solid var(--ink);border-radius:8px;
+    box-shadow:9px 11px 0 rgba(0,0,0,.45);padding:24px;text-align:center;transform:rotate(-.6deg)}
+  .panel h1{font-family:"Segoe Print","Comic Sans MS",cursive;font-size:26px;margin:0 0 10px}
+  .panel p{font-size:14px;line-height:1.5;margin:0 0 18px;opacity:.85}
+  .panel .rules{text-align:left;font-size:12.5px;line-height:1.6;background:#f4efdd;
+    border:2px dashed #c3b795;border-radius:6px;padding:10px 12px;margin:0 0 18px}
+  .big{background:var(--red);color:#fff;border:3px solid var(--ink);border-radius:6px;
+    box-shadow:4px 5px 0 rgba(0,0,0,.4);padding:12px 22px;font:inherit;font-weight:800;
+    font-size:15px;cursor:pointer;letter-spacing:.4px}
+  .big:hover{transform:translateY(-2px)}
+  .big:active{transform:translate(3px,4px);box-shadow:1px 1px 0 rgba(0,0,0,.4)}
+
+  .float{position:absolute;left:50%;top:12%;transform:translateX(-50%);pointer-events:none;
+    font-weight:900;font-size:26px;text-shadow:2px 2px 0 #fff;animation:floatUp .9s ease-out forwards;z-index:9}
+  .float.dmg{color:var(--red)}
+  .float.good{color:var(--green);font-size:15px}
+  @keyframes floatUp{to{transform:translate(-50%,-42px);opacity:0}}
+
+  .shake{animation:shake .42s ease-in-out}
+  @keyframes shake{
+    0%,100%{transform:rotate(var(--rot,0deg)) translateX(0)}
+    25%{transform:rotate(var(--rot,0deg)) translateX(-7px)}
+    75%{transform:rotate(var(--rot,0deg)) translateX(7px)}
+  }
+  .windup{animation:windup .5s ease-in-out infinite alternate}
+  @keyframes windup{
+    from{transform:rotate(var(--rot,0deg)) scale(1)}
+    to{transform:rotate(var(--rot,0deg)) scale(1.06);filter:drop-shadow(0 0 10px rgba(209,55,47,.8))}
+  }
+  #enemyCard.phase3{--rot:1deg;background-color:#fff5f0}
+
+  @media (max-width:760px){
+    #arena{grid-template-columns:1fr 1fr;gap:8px;min-height:0}
+    .card{width:150px;padding:8px}
+    #enemyCard{width:170px;padding:9px}
+    .examHead{font-size:14px}
+    .examSub{font-size:7px}
+    .face{font-size:40px}
+    .eye{width:16px;height:16px}
+    .brows{display:none}
+    .commands{grid-template-columns:repeat(3,1fr)}
+    .log{font-size:11.5px;min-height:58px}
+  }
